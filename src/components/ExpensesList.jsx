@@ -3,9 +3,9 @@ import ExpenseItem from "./ExpenseItem";
 import styled from "styled-components";
 
 const StUl = styled.ul`
+  background-color: #fff;
   padding: 30px;
   display: flex;
-  border: 1px solid green;
   border-radius: 30px;
   flex-direction: column;
   gap: 10px;

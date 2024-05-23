@@ -4,87 +4,27 @@ import styled from "styled-components";
 const StMonthsListDiv = styled.div`
   padding: 30px;
   border-radius: 30px;
-  border: 1px solid red;
+  background-color: #fff;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 `;
-const monthsList = [
-  {
-    name: "jan",
-    number: 1,
-    isActive: true,
-    backColor: "green",
-  },
-  {
-    name: "feb",
-    number: 2,
-    isActive: false,
-    backColor: "white",
-  },
-  {
-    name: "mar",
-    number: 3,
-    isActive: false,
-    backColor: "white",
-  },
-  {
-    name: "apr",
-    number: 4,
-    isActive: false,
-    backColor: "white",
-  },
-  {
-    name: "may",
-    number: 5,
-    isActive: false,
-    backColor: "white",
-  },
-  {
-    name: "jun",
-    number: 6,
-    isActive: false,
-    backColor: "white",
-  },
-  // {
-  //   name: "jul",
-  //   number: 7,
-  //   isActive: false,
-  // },
-  // {
-  //   name: "aug",
-  //   number: 8,
-  //   isActive: false,
-  // },
-  // {
-  //   name: "sep",
-  //   number: 9,
-  //   isActive: false,
-  // },
-  // {
-  //   name: "oct",
-  //   number: 10,
-  //   isActive: false,
-  // },
-  // {
-  //   name: "nov",
-  //   number: 11,
-  //   isActive: false,
-  // },
-  // {
-  //   name: "dec",
-  //   number: 12,
-  //   isActive: false,
-  // },
-];
+const monthsList = [...Array(12).keys()].map((month) => month + 1);
 const StMonthButton = styled.button`
-  border: 1px solid black;
-  width: 104px;
+  border-radius: 20px;
+  font-size: 20px;
+  border: none;
+  width: 150px;
   padding: 20px;
   text-align: center;
   cursor: pointer;
-  background-color: ${(props) => (props.$backcolor ? "green" : "white")};
+  transition: 0.3s;
+  color: ${(props) => (props.$clicked ? "#fff" : "#000")};
+  background-color: ${(props) => (props.$clicked ? "#eb6530" : "#e1e1e1")};
+  &:hover {
+    background-color: ${(props) => (props.$clicked ? "#b64e25" : "darkgray")};
+  }
 `;
 const MonthsList = ({
   expenses,
@@ -95,22 +35,24 @@ const MonthsList = ({
   const changeMonthHandler = (number) => {
     window.localStorage.setItem("selectedMonth", number);
     setSelectedMonth(number);
-    setExpensesList(
-      expenses.filter((expense) => {
-        return +expense.date.slice(5, 7) === number;
-      })
-    );
+    const selectedMonthExpensesList = expenses.filter((expense) => {
+      return +expense.date.slice(5, 7) === number;
+    });
+    setExpensesList(selectedMonthExpensesList);
+    if (selectedMonthExpensesList.length === 0) {
+      // 해당하는 거 없을 때 나오게 하기
+    }
   };
   return (
     <StMonthsListDiv>
       {monthsList.map((month) => {
         return (
           <StMonthButton
-            $backcolor={month.number === +selectedMonth}
-            onClick={() => changeMonthHandler(month.number)}
-            key={month.number}
+            $clicked={month === +selectedMonth}
+            onClick={() => changeMonthHandler(month)}
+            key={month}
           >
-            {month.number}월
+            {month}월
           </StMonthButton>
         );
       })}

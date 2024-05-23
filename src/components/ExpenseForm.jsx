@@ -2,25 +2,46 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 // 일단 대기
 import styled from "styled-components";
-// import useInput from "../hooks/useInput";
-//   styled-components
+// styled-components
 const StForm = styled.form`
-  border: 1px solid purple;
+  background-color: #fff;
   border-radius: 30px;
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   justify-content: center;
 `;
 const StInputBox = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 120px;
+  flex: 1;
+`;
+const StInput = styled.input`
+  margin-top: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #c4c4c4;
+  height: 30px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+`;
+const StButton = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #49914b;
+  color: #fff;
+  cursor: pointer;
 `;
 const ExpenseForm = ({ selectedMonth, setExpenses }) => {
   // 나중에 selectedMonth 따라 바뀌는걸로 변경하기
-  const [date, setDate] = useState(`2024-01-01`);
+  const [date, setDate] = useState(() => {
+    return selectedMonth >= 10
+      ? `2024-${selectedMonth}-01`
+      : `2024-0${selectedMonth}-01`;
+  });
   const [item, setItem] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -29,8 +50,19 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
   const addExpenseHandler = (e) => {
     e.preventDefault();
     // 유효성 검사 (나중에 date 변경해야함)
-    if (!date.trim() || !item.trim() || !amount.trim() || !description.trim()) {
-      alert("다채워");
+    const format =
+      /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    if (!format.test(date.trim())) {
+      alert("날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
+      return;
+    }
+
+    if (isNaN(amount) || !amount.trim()) {
+      alert("금액은 숫자로 입력해주세요.");
+      return;
+    }
+    if (!item.trim() || !description.trim()) {
+      alert("항목, 금액, 내용을 모두 입력해주세요.");
       return;
     }
     // 새로운 지출 항목 객체
@@ -54,7 +86,8 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
     <StForm>
       <StInputBox>
         <label>날짜</label>
-        <input
+        <StInput
+          placeholder="YYYY-MM-DD"
           value={date}
           onChange={(e) => {
             setDate(e.target.value);
@@ -63,7 +96,8 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
       </StInputBox>
       <StInputBox>
         <label>항목</label>
-        <input
+        <StInput
+          placeholder="지출 항목"
           type="text"
           value={item}
           onChange={(e) => {
@@ -73,7 +107,8 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
       </StInputBox>
       <StInputBox>
         <label>금액</label>
-        <input
+        <StInput
+          placeholder="지출 금액"
           type="number"
           value={amount}
           onChange={(e) => {
@@ -83,7 +118,8 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
       </StInputBox>
       <StInputBox>
         <label>내용</label>
-        <input
+        <StInput
+          placeholder="지출 내용"
           type="text"
           value={description}
           onChange={(e) => {
@@ -91,7 +127,7 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
           }}
         />
       </StInputBox>
-      <button onClick={addExpenseHandler}>저장</button>
+      <StButton onClick={addExpenseHandler}>저장</StButton>
     </StForm>
   );
 };

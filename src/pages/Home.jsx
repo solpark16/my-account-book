@@ -11,7 +11,6 @@ const StDiv = styled.div`
   max-width: 1200px;
   min-width: 800px;
   margin: 0 auto;
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -83,9 +82,14 @@ const Home = () => {
     if (location.state !== null) {
       if (location.state.deletedExpenses) {
         const { deletedExpenses } = location.state.deletedExpenses;
-        console.log(location.state.deletedExpenses);
 
         setExpenses(deletedExpenses);
+        navigate(location.pathname, { state: null, replace: true });
+      }
+      if (location.state.updatedExpenses) {
+        const { updatedExpenses } = location.state.updatedExpenses;
+
+        setExpenses(updatedExpenses);
         navigate(location.pathname, { state: null, replace: true });
       }
     }
@@ -95,7 +99,7 @@ const Home = () => {
   useEffect(() => {
     if (selectedMonth === null) {
       window.localStorage.setItem("selectedMonth", 1);
-      setSelectedMonth("01");
+      setSelectedMonth(1);
     }
   }, []);
 
@@ -109,7 +113,6 @@ const Home = () => {
   }, [expenses]);
   return (
     <StDiv>
-      <h1>이것은 나의 가계부입니다.</h1>
       <ExpenseForm selectedMonth={selectedMonth} setExpenses={setExpenses} />
       <MonthsList
         expenses={expenses}
