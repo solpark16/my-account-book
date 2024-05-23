@@ -79,7 +79,6 @@ const Home = () => {
   const [expensesList, setExpensesList] = useState([]);
 
   // detail 페이지에서 가져온 삭제 id를 적용해 삭제하는 useEffect
-
   useEffect(() => {
     if (location.state !== null) {
       if (location.state.deletedExpenses) {
