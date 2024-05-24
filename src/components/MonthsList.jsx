@@ -1,6 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { ExpensesContext } from "../context/ExpensesContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedMonth } from "../redux/slices/selectedMonthSilce";
+import { setExpensesList } from "../redux/slices/expensesListSlice";
 
 const StMonthsListDiv = styled.div`
   padding: 30px;
@@ -29,17 +31,16 @@ const StMonthButton = styled.button`
 `;
 const MonthsList = () => {
   const monthsList = [...Array(12).keys()].map((month) => month + 1);
-
-  const { expenses, setExpensesList, selectedMonth, setSelectedMonth } =
-    useContext(ExpensesContext);
-
+  const { selectedMonth } = useSelector((state) => state.selectedMonth);
+  const { expenses } = useSelector((state) => state.expenses);
+  const dispatch = useDispatch();
   const changeMonthHandler = (number) => {
     window.localStorage.setItem("selectedMonth", number);
-    setSelectedMonth(number);
+    dispatch(setSelectedMonth(number));
     const selectedMonthExpensesList = expenses.filter((expense) => {
       return +expense.date.slice(5, 7) === number;
     });
-    setExpensesList(selectedMonthExpensesList);
+    dispatch(setExpensesList(selectedMonthExpensesList));
     if (selectedMonthExpensesList.length === 0) {
       // 해당하는 거 없을 때 나오게 하기
     }
@@ -49,7 +50,7 @@ const MonthsList = () => {
   useEffect(() => {
     if (selectedMonth === null) {
       window.localStorage.setItem("selectedMonth", 1);
-      setSelectedMonth(1);
+      dispatch(setSelectedMonth(1));
     }
   }, []);
   return (

@@ -1,7 +1,8 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ExpensesContext } from "../context/ExpensesContext";
+import { setExpenses } from "../redux/slices/expensesSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 // styled-components
 const StDiv = styled.div`
@@ -43,7 +44,9 @@ const StButton = styled.button`
 const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { expenses, setExpenses } = useContext(ExpensesContext);
+  const dispatch = useDispatch();
+  const { expenses } = useSelector((state) => state.expenses);
+
   const { expense } = location.state.expense;
   // input ref
   const inputDateRef = useRef(null);
@@ -101,14 +104,16 @@ const Detail = () => {
       amount,
       description,
     };
-    setExpenses(
-      expenses.map((expense) => {
-        if (updateExpense.id !== expense.id) {
-          return expense;
-        } else if (updateExpense.id === expense.id) {
-          return updateExpense;
-        }
-      })
+    dispatch(
+      setExpenses(
+        expenses.map((expense) => {
+          if (updateExpense.id !== expense.id) {
+            return expense;
+          } else if (updateExpense.id === expense.id) {
+            return updateExpense;
+          }
+        })
+      )
     );
     navigate(`/`);
   };
@@ -117,10 +122,12 @@ const Detail = () => {
   const handleDelete = () => {
     confirm("정말로 삭제하시겠습니까?");
     const deleteExpenseId = expense.id;
-    setExpenses(
-      expenses.filter((expense) => {
-        return deleteExpenseId !== expense.id;
-      })
+    dispatch(
+      setExpenses(
+        expenses.filter((expense) => {
+          return deleteExpenseId !== expense.id;
+        })
+      )
     );
     navigate(`/`);
   };

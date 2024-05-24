@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import { ExpensesContext } from "../context/ExpensesContext";
+import { useSelector, useDispatch } from "react-redux";
+import { setExpenses } from "../redux/slices/expensesSlice";
 
 // styled-components
 const StForm = styled.form`
@@ -37,8 +38,10 @@ const StButton = styled.button`
   cursor: pointer;
 `;
 const ExpenseForm = () => {
-  const { selectedMonth, setExpenses } = useContext(ExpensesContext);
+  const { selectedMonth } = useSelector((state) => state.selectedMonth);
+  const { expenses } = useSelector((state) => state.expenses);
 
+  const dispatch = useDispatch();
   // 나중에 selectedMonth 따라 바뀌는걸로 변경하기
   const [date, setDate] = useState(() => {
     return selectedMonth >= 10
@@ -77,7 +80,7 @@ const ExpenseForm = () => {
       description,
     };
     // 기존 지출 항목들에 새로운 지출 항목 추가
-    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
+    dispatch(setExpenses([...expenses, newExpense]));
 
     // 각 인풋 초기화
     setDate("2024-01-01");

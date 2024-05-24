@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ExpensesContext } from "../context/ExpensesContext";
 
 const StLi = styled.li`
   background-color: #f9f9f9;
