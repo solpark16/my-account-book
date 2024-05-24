@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-// 일단 대기
 import styled from "styled-components";
+import { ExpensesContext } from "../context/ExpensesContext";
+
 // styled-components
 const StForm = styled.form`
   background-color: #fff;
@@ -35,7 +36,9 @@ const StButton = styled.button`
   color: #fff;
   cursor: pointer;
 `;
-const ExpenseForm = ({ selectedMonth, setExpenses }) => {
+const ExpenseForm = () => {
+  const { selectedMonth, setExpenses } = useContext(ExpensesContext);
+
   // 나중에 selectedMonth 따라 바뀌는걸로 변경하기
   const [date, setDate] = useState(() => {
     return selectedMonth >= 10
@@ -49,7 +52,7 @@ const ExpenseForm = ({ selectedMonth, setExpenses }) => {
   // 지출 항목 추가 이벤트 함수
   const addExpenseHandler = (e) => {
     e.preventDefault();
-    // 유효성 검사 (나중에 date 변경해야함)
+    // 유효성 검사
     const format =
       /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
     if (!format.test(date.trim())) {

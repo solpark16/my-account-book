@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { ExpensesContext } from "../context/ExpensesContext";
 
 const StMonthsListDiv = styled.div`
   padding: 30px;
@@ -10,7 +11,7 @@ const StMonthsListDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `;
-const monthsList = [...Array(12).keys()].map((month) => month + 1);
+
 const StMonthButton = styled.button`
   border-radius: 20px;
   font-size: 20px;
@@ -26,12 +27,12 @@ const StMonthButton = styled.button`
     background-color: ${(props) => (props.$clicked ? "#b64e25" : "darkgray")};
   }
 `;
-const MonthsList = ({
-  expenses,
-  setExpensesList,
-  selectedMonth,
-  setSelectedMonth,
-}) => {
+const MonthsList = () => {
+  const monthsList = [...Array(12).keys()].map((month) => month + 1);
+
+  const { expenses, setExpensesList, selectedMonth, setSelectedMonth } =
+    useContext(ExpensesContext);
+
   const changeMonthHandler = (number) => {
     window.localStorage.setItem("selectedMonth", number);
     setSelectedMonth(number);
@@ -43,6 +44,14 @@ const MonthsList = ({
       // 해당하는 거 없을 때 나오게 하기
     }
   };
+
+  // selectedMonth가 null일 경우 1로 설정
+  useEffect(() => {
+    if (selectedMonth === null) {
+      window.localStorage.setItem("selectedMonth", 1);
+      setSelectedMonth(1);
+    }
+  }, []);
   return (
     <StMonthsListDiv>
       {monthsList.map((month) => {

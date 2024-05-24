@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { ExpensesContext } from "../context/ExpensesContext";
 
 const StLi = styled.li`
   background-color: #f9f9f9;
@@ -34,13 +35,12 @@ const StItemRight = styled.div`
   font-size: 18px;
   white-space: nowrap;
 `;
-const ExpenseItem = ({ expenses, expense }) => {
+const ExpenseItem = ({ expense }) => {
   const navigate = useNavigate();
   const onClickLiHandler = (expense) => {
     navigate(`/detail/${id}`, {
       state: {
         expense: { expense },
-        expenses: { expenses },
       },
     });
   };
@@ -50,7 +50,7 @@ const ExpenseItem = ({ expenses, expense }) => {
       <StItemLeft>
         <p>{date}</p>
         <StDescription>
-          {item}-{description}
+          {item} - {description}
         </StDescription>
       </StItemLeft>
       <StItemRight>{amount}원</StItemRight>
