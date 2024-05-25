@@ -102,7 +102,7 @@ const Detail = () => {
       id: expense.id,
       date,
       item,
-      amount,
+      amount: +amount,
       description,
     };
     dispatch(
