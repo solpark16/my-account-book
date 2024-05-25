@@ -30,7 +30,7 @@ const StMonthButton = styled.button`
   }
 `;
 const MonthsList = () => {
-  const monthsList = [...Array(12).keys()].map((month) => month + 1);
+  const monthsList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const { selectedMonth } = useSelector((state) => state.selectedMonth);
   const { expenses } = useSelector((state) => state.expenses);
   const dispatch = useDispatch();

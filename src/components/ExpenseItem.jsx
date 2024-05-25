@@ -52,7 +52,7 @@ const ExpenseItem = ({ expense }) => {
           {item} - {description}
         </StDescription>
       </StItemLeft>
-      <StItemRight>{amount}원</StItemRight>
+      <StItemRight>{amount.toLocaleString()}원</StItemRight>
     </StLi>
   );
 };

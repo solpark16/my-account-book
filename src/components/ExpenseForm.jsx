@@ -76,7 +76,7 @@ const ExpenseForm = () => {
       id: uuidv4(),
       date,
       item,
-      amount,
+      amount: +amount,
       description,
     };
     // 기존 지출 항목들에 새로운 지출 항목 추가

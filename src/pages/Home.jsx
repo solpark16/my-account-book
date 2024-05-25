@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ExpenseForm from "../components/ExpenseForm";
 import MonthsList from "../components/MonthsList";
 import ExpensesList from "../components/ExpensesList";
+import ExpenseSummary from "../components/ExpenseSummary";
 
 // styled-components
 const StDiv = styled.div`
@@ -18,6 +19,7 @@ const Home = () => {
     <StDiv>
       <ExpenseForm />
       <MonthsList />
+      <ExpenseSummary />
       <ExpensesList />
     </StDiv>
   );

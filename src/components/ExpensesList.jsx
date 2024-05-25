@@ -12,6 +12,13 @@ const StUl = styled.ul`
   flex-direction: column;
   gap: 10px;
 `;
+const StDiv = styled.div`
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 30px;
+  color: #989898;
+  border-radius: 20px;
+`;
 const ExpensesList = () => {
   const { expenses } = useSelector((state) => state.expenses);
   const { expensesList } = useSelector((state) => state.expensesList);
@@ -27,9 +34,13 @@ const ExpensesList = () => {
   }, [expenses]);
   return (
     <StUl>
-      {expensesList.map((expense) => {
-        return <ExpenseItem key={expense.id} expense={expense} />;
-      })}
+      {expensesList.length > 0 ? (
+        expensesList.map((expense) => {
+          return <ExpenseItem key={expense.id} expense={expense} />;
+        })
+      ) : (
+        <StDiv>지출이 없습니다.</StDiv>
+      )}
     </StUl>
   );
 };
