@@ -35,9 +35,13 @@ const ExpensesList = () => {
   return (
     <StUl>
       {expensesList.length > 0 ? (
-        expensesList.map((expense) => {
-          return <ExpenseItem key={expense.id} expense={expense} />;
-        })
+        [...expensesList]
+          .sort((a, b) => {
+            return b.date.split("-").join("") - a.date.split("-").join("");
+          })
+          .map((expense) => {
+            return <ExpenseItem key={expense.id} expense={expense} />;
+          })
       ) : (
         <StDiv>지출이 없습니다.</StDiv>
       )}

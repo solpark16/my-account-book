@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -83,11 +83,22 @@ const ExpenseForm = () => {
     dispatch(setExpenses([...expenses, newExpense]));
 
     // 각 인풋 초기화
-    setDate("2024-01-01");
+    setDate(() => {
+      return selectedMonth >= 10
+        ? `2024-${selectedMonth}-01`
+        : `2024-0${selectedMonth}-01`;
+    });
     setItem("");
     setAmount("");
     setDescription("");
   };
+  useEffect(() => {
+    setDate(() => {
+      return selectedMonth >= 10
+        ? `2024-${selectedMonth}-01`
+        : `2024-0${selectedMonth}-01`;
+    });
+  }, [selectedMonth]);
   return (
     <StForm>
       <StInputBox>
