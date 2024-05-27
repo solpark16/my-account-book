@@ -98,6 +98,7 @@ const Detail = () => {
       amount: +amount,
       description,
     };
+    // dispatch 사용해 전역관리 state 업데이트
     dispatch(
       setExpenses(
         expenses.map((expense) => {
@@ -116,6 +117,7 @@ const Detail = () => {
   const handleDelete = () => {
     confirm("정말로 삭제하시겠습니까?");
     const deleteExpenseId = expense.id;
+    // dispatch 사용해 전역관리 state 업데이트
     dispatch(
       setExpenses(
         expenses.filter((expense) => {
