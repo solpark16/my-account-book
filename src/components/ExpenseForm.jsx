@@ -37,13 +37,19 @@ const StButton = styled.button`
   color: #fff;
   cursor: pointer;
 `;
+
+// component
 const ExpenseForm = () => {
+  // useSelector
   const { selectedMonth } = useSelector((state) => state.selectedMonth);
   const { expenses } = useSelector((state) => state.expenses);
 
+  // useDispatch
   const dispatch = useDispatch();
-  // 나중에 selectedMonth 따라 바뀌는걸로 변경하기
+
+  // useState
   const [date, setDate] = useState(() => {
+    // YYYY-MM-DD 형식
     return selectedMonth >= 10
       ? `2024-${selectedMonth}-01`
       : `2024-0${selectedMonth}-01`;
@@ -55,6 +61,7 @@ const ExpenseForm = () => {
   // 지출 항목 추가 이벤트 함수
   const addExpenseHandler = (e) => {
     e.preventDefault();
+
     // 유효성 검사
     const format =
       /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
@@ -62,7 +69,6 @@ const ExpenseForm = () => {
       alert("날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
       return;
     }
-
     if (isNaN(amount) || !amount.trim()) {
       alert("금액은 숫자로 입력해주세요.");
       return;
@@ -71,6 +77,7 @@ const ExpenseForm = () => {
       alert("항목, 금액, 내용을 모두 입력해주세요.");
       return;
     }
+
     // 새로운 지출 항목 객체
     const newExpense = {
       id: uuidv4(),
@@ -92,6 +99,8 @@ const ExpenseForm = () => {
     setAmount("");
     setDescription("");
   };
+
+  // selectedMonth 바뀔 때마다 input의 month 변경
   useEffect(() => {
     setDate(() => {
       return selectedMonth >= 10
@@ -99,6 +108,7 @@ const ExpenseForm = () => {
         : `2024-0${selectedMonth}-01`;
     });
   }, [selectedMonth]);
+
   return (
     <StForm>
       <StInputBox>

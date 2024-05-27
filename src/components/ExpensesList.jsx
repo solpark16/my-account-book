@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setExpensesList } from "../redux/slices/expensesListSlice";
 
+// styled-components
 const StUl = styled.ul`
   background-color: #fff;
   padding: 30px;
@@ -19,12 +20,16 @@ const StDiv = styled.div`
   color: #989898;
   border-radius: 20px;
 `;
+
+// component
 const ExpensesList = () => {
+  // useSelector
   const { expenses } = useSelector((state) => state.expenses);
   const { expensesList } = useSelector((state) => state.expensesList);
   const { selectedMonth } = useSelector((state) => state.selectedMonth);
-
+  // useDispatch
   const dispatch = useDispatch();
+
   // form을 통해 추가될 때마다 expensesList 변경으로 바로 화면에 나오도록 함.
   useEffect(() => {
     const selectedMonthExpenses = expenses.filter((expense) => {
@@ -32,6 +37,7 @@ const ExpensesList = () => {
     });
     dispatch(setExpensesList(selectedMonthExpenses));
   }, [expenses]);
+
   return (
     <StUl>
       {expensesList.length > 0 ? (

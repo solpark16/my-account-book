@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
+// styled-components
 const StDiv = styled.div`
   background-color: #fff;
   padding: 30px;
@@ -46,14 +47,21 @@ const StColorItem = styled.div`
   background-color: ${(props) => props.$backColor};
   margin-right: 8px;
 `;
+
+// component
 const ExpenseSummary = () => {
+  // useSelector
   const { expensesList } = useSelector((state) => state.expensesList);
   const { selectedMonth } = useSelector((state) => state.selectedMonth);
+
+  // 각 항목별 컬러 배열
   const graphColor = ["#007BFF", "#28A745", "#DC3545", "#FFC107", "#17A2B8"];
+
   // 월별 총 지출 계산
   const expensesSummary = expensesList.reduce((acc, cur) => {
     return acc + Number(cur.amount);
   }, 0);
+
   // 항목별 지출 금액 계산
   const expensesItemList = () => {
     const expensesItemList = {};
@@ -64,6 +72,7 @@ const ExpenseSummary = () => {
         expensesItemList[expense.item] = +expense.amount;
       }
     });
+
     return Object.entries(expensesItemList)
       .sort((a, b) => b[1] - a[1])
       .reduce((acc, cur, idx) => {
@@ -77,6 +86,7 @@ const ExpenseSummary = () => {
         return acc;
       }, []);
   };
+
   return (
     <StDiv>
       <StTitle>

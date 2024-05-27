@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+// styled-components
 const StLi = styled.li`
   background-color: #f9f9f9;
   line-height: 1.5;
@@ -34,8 +35,14 @@ const StItemRight = styled.div`
   font-size: 18px;
   white-space: nowrap;
 `;
+
+// component
 const ExpenseItem = ({ expense }) => {
+  // useNavigate
   const navigate = useNavigate();
+  const { id, date, item, description, amount } = expense;
+
+  // expense를 넘기면서 해당 id를 가진 detail 페이지로 이동하는 함수
   const onClickLiHandler = (expense) => {
     navigate(`/detail/${id}`, {
       state: {
@@ -43,7 +50,6 @@ const ExpenseItem = ({ expense }) => {
       },
     });
   };
-  const { id, date, item, description, amount } = expense;
   return (
     <StLi onClick={() => onClickLiHandler(expense)}>
       <StItemLeft>

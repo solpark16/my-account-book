@@ -46,14 +46,7 @@ const Detail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { expenses } = useSelector((state) => state.expenses);
-
   const { expense } = location.state.expense;
-  // input ref
-  // TODO: ref 선언 이유 질문
-  // const inputDateRef = useRef(null);
-  // const inputItemRef = useRef(null);
-  // const inputAmountRef = useRef(null);
-  // const inputDescriptionRef = useRef(null);
   // save ref
   const saveDateRef = useRef(expense.date);
   const saveItemRef = useRef(expense.item);
@@ -132,13 +125,13 @@ const Detail = () => {
     );
     navigate(`/`);
   };
+
   return (
     <StDiv>
       <StLabel>날짜</StLabel>
       <StInput
         placeholder="YYYY-MM-DD"
         type="text"
-        // ref={inputDateRef}
         defaultValue={expense.date}
         onChange={handleDateInputChange}
       />
@@ -146,7 +139,6 @@ const Detail = () => {
       <StInput
         placeholder="지출 항목"
         type="text"
-        // ref={inputItemRef}
         defaultValue={expense.item}
         onChange={handleItemInputChange}
       />
@@ -154,7 +146,6 @@ const Detail = () => {
       <StInput
         placeholder="지출 금액"
         type="number"
-        // ref={inputAmountRef}
         defaultValue={expense.amount}
         onChange={handleAmountInputChange}
       />
@@ -162,7 +153,6 @@ const Detail = () => {
       <StInput
         placeholder="지출 내용"
         type="text"
-        // ref={inputDescriptionRef}
         defaultValue={expense.description}
         onChange={handleDescriptionInputChange}
       />

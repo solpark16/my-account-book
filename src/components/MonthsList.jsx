@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedMonth } from "../redux/slices/selectedMonthSilce";
 import { setExpensesList } from "../redux/slices/expensesListSlice";
 
+// styled-components
 const StMonthsListDiv = styled.div`
   padding: 30px;
   border-radius: 30px;
@@ -29,11 +30,19 @@ const StMonthButton = styled.button`
     background-color: ${(props) => (props.$clicked ? "#b64e25" : "darkgray")};
   }
 `;
+
+// component
 const MonthsList = () => {
-  const monthsList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  // useSelector
   const { selectedMonth } = useSelector((state) => state.selectedMonth);
   const { expenses } = useSelector((state) => state.expenses);
+  // useDispatch
   const dispatch = useDispatch();
+
+  // month 배열
+  const monthsList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  // month 바뀔 때마다 로컬 스토리지에도 변경 및 expensesList 변경
   const changeMonthHandler = (number) => {
     window.localStorage.setItem("selectedMonth", number);
     dispatch(setSelectedMonth(number));
@@ -41,9 +50,6 @@ const MonthsList = () => {
       return +expense.date.slice(5, 7) === number;
     });
     dispatch(setExpensesList(selectedMonthExpensesList));
-    if (selectedMonthExpensesList.length === 0) {
-      // 해당하는 거 없을 때 나오게 하기
-    }
   };
 
   // selectedMonth가 null일 경우 1로 설정
@@ -53,6 +59,7 @@ const MonthsList = () => {
       dispatch(setSelectedMonth(1));
     }
   }, []);
+
   return (
     <StMonthsListDiv>
       {monthsList.map((month) => {
