@@ -4,42 +4,6 @@ import styled from "styled-components";
 import { setExpenses } from "../redux/slices/expensesSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-// styled-components
-const StDiv = styled.div`
-  background-color: #fff;
-  max-width: 1200px;
-  min-width: 800px;
-  margin: 0 auto;
-  padding: 30px;
-  box-sizing: border-box;
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-`;
-const StLabel = styled.label`
-  margin-bottom: 10px;
-`;
-const StInput = styled.input`
-  border-radius: 10px;
-  border: 1px solid #c4c4c4;
-  margin-bottom: 10px;
-  height: 30px;
-  padding: 10px;
-  font-size: 16px;
-`;
-const StBtnBox = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-const StButton = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: ${(props) => props.$backColor};
-  color: #fff;
-  cursor: pointer;
-`;
-
 // Detail Component
 const Detail = () => {
   const location = useLocation();
@@ -177,5 +141,41 @@ const Detail = () => {
     </StDiv>
   );
 };
+
+// styled-components
+const StDiv = styled.div`
+  background-color: #fff;
+  max-width: 1200px;
+  min-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+`;
+const StLabel = styled.label`
+  margin-bottom: 10px;
+`;
+const StInput = styled.input`
+  border-radius: 10px;
+  border: 1px solid #c4c4c4;
+  margin-bottom: 10px;
+  height: 30px;
+  padding: 10px;
+  font-size: 16px;
+`;
+const StBtnBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+const StButton = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${(props) => props.$backColor};
+  color: #fff;
+  cursor: pointer;
+`;
 
 export default Detail;

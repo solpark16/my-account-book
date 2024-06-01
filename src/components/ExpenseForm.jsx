@@ -4,40 +4,6 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setExpenses } from "../redux/slices/expensesSlice";
 
-// styled-components
-const StForm = styled.form`
-  background-color: #fff;
-  border-radius: 30px;
-  padding: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-`;
-const StInputBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-const StInput = styled.input`
-  margin-top: 10px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  border: 1px solid #c4c4c4;
-  height: 30px;
-  padding: 10px;
-  font-size: 16px;
-  width: 100%;
-`;
-const StButton = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #49914b;
-  color: #fff;
-  cursor: pointer;
-`;
-
 // component
 const ExpenseForm = () => {
   // useSelector
@@ -158,5 +124,39 @@ const ExpenseForm = () => {
     </StForm>
   );
 };
+
+// styled-components
+const StForm = styled.form`
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+`;
+const StInputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+const StInput = styled.input`
+  margin-top: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #c4c4c4;
+  height: 30px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+`;
+const StButton = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #49914b;
+  color: #fff;
+  cursor: pointer;
+`;
 
 export default ExpenseForm;

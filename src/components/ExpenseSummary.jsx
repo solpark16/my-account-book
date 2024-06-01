@@ -2,52 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-// styled-components
-const StDiv = styled.div`
-  background-color: #fff;
-  padding: 30px;
-  display: flex;
-  border-radius: 30px;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-`;
-const StUl = styled.ul`
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-`;
-const StLi = styled.li`
-  display: flex;
-  align-items: center;
-`;
-const StTitle = styled.p`
-  font-size: 24px;
-  font-weight: bold;
-`;
-const StGraph = styled.div`
-  margin-top: 20px;
-  overflow: hidden;
-  display: flex;
-  height: 50px;
-  background-color: #e1e1e1;
-  border-radius: 10px;
-`;
-const StGraphItem = styled.div`
-  background-color: ${(props) => props.$backColor};
-  box-sizing: border-box;
-  height: 100%;
-  width: ${(props) => props.$width}%;
-`;
-const StColorItem = styled.div`
-  width: 20px;
-  height: 10px;
-  background-color: ${(props) => props.$backColor};
-  margin-right: 8px;
-`;
-
 // component
 const ExpenseSummary = () => {
   // useSelector
@@ -117,5 +71,51 @@ const ExpenseSummary = () => {
     </StDiv>
   );
 };
+
+// styled-components
+const StDiv = styled.div`
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  border-radius: 30px;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+`;
+const StUl = styled.ul`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+`;
+const StLi = styled.li`
+  display: flex;
+  align-items: center;
+`;
+const StTitle = styled.p`
+  font-size: 24px;
+  font-weight: bold;
+`;
+const StGraph = styled.div`
+  margin-top: 20px;
+  overflow: hidden;
+  display: flex;
+  height: 50px;
+  background-color: #e1e1e1;
+  border-radius: 10px;
+`;
+const StGraphItem = styled.div`
+  background-color: ${(props) => props.$backColor};
+  box-sizing: border-box;
+  height: 100%;
+  width: ${(props) => props.$width}%;
+`;
+const StColorItem = styled.div`
+  width: 20px;
+  height: 10px;
+  background-color: ${(props) => props.$backColor};
+  margin-right: 8px;
+`;
 
 export default ExpenseSummary;

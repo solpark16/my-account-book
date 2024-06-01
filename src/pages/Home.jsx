@@ -4,16 +4,6 @@ import MonthsList from "../components/MonthsList";
 import ExpensesList from "../components/ExpensesList";
 import ExpenseSummary from "../components/ExpenseSummary";
 
-// styled-components
-const StDiv = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-`;
-
 const Home = () => {
   return (
     <StDiv>
@@ -24,5 +14,15 @@ const Home = () => {
     </StDiv>
   );
 };
+
+// styled-components
+const StDiv = styled.div`
+  max-width: 1200px;
+  min-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
 
 export default Home;

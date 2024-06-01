@@ -4,23 +4,6 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setExpensesList } from "../redux/slices/expensesListSlice";
 
-// styled-components
-const StUl = styled.ul`
-  background-color: #fff;
-  padding: 30px;
-  display: flex;
-  border-radius: 30px;
-  flex-direction: column;
-  gap: 10px;
-`;
-const StDiv = styled.div`
-  background-color: #f9f9f9;
-  text-align: center;
-  padding: 30px;
-  color: #989898;
-  border-radius: 20px;
-`;
-
 // component
 const ExpensesList = () => {
   // useSelector
@@ -54,5 +37,22 @@ const ExpensesList = () => {
     </StUl>
   );
 };
+
+// styled-components
+const StUl = styled.ul`
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  border-radius: 30px;
+  flex-direction: column;
+  gap: 10px;
+`;
+const StDiv = styled.div`
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 30px;
+  color: #989898;
+  border-radius: 20px;
+`;
 
 export default ExpensesList;
